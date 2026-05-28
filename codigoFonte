@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora de IMC</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      text-align: center;
+      width: 280px;
+    }
+    input, button {
+      width: 90%;
+      padding: 8px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #4CAF50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    #resultado {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Calculadora de IMC</h2>
+    <input type="number" id="peso" placeholder="Peso (kg)" step="0.1">
+    <input type="number" id="altura" placeholder="Altura (m)" step="0.01">
+    <button id="btn">Calcular</button>
+    <p id="resultado"></p>
+  </div>
+
+  <script>
+    const btn = document.getElementById("btn");
+    const resultado = document.getElementById("resultado");
+
+    btn.addEventListener("click", () => {
+      const peso = +document.getElementById("peso").value;
+      const altura = +document.getElementById("altura").value;
+
+      if (!peso || !altura) {
+        resultado.textContent = "Insira valores válidos!";
+        return;
+      }
+
+      const imc = (peso / (altura * altura)).toFixed(2);
+      const classificacao =
+        imc < 18.5 ? "Magreza" :
+        imc <= 24.9 ? "Normal" :
+        imc <= 30   ? "Sobrepeso" :
+                      "Obesidade";
+
+      resultado.textContent = `IMC: ${imc} kg/m² - ${classificacao}`;
+    });
+  </script>
+</body>
+</html>
